@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Category, Product, Product_img, Savat, Ichkicategory
+from .models import *
 from .models import CustomUser
 
 
@@ -34,18 +34,38 @@ class CustomUserSer(serializers.ModelSerializer):
         
     class Meta:
         model = CustomUser  
-        fields = ["id",'username', 'password' ,"user_extra_data"]
+        fields = ["id",'username', 'password', 'number',"user_extra_data"]
         extra_kwargs = {'password' : {'write_only': True}}
     
 
 
+class UserProfilSer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields= ['user','name', 'family','father_name','birth_date','gender', 'email','phone_number']
 
+
+class Category1Ser(serializers.ModelSerializer):
+    class Meta:
+        model = Category1
+        fields = ['name','photo']
 
 class CategorySer(serializers.ModelSerializer):
     class Meta:
         model = Category     
-        fields = ['id', 'name', 'rasm','parent']
-    
+        fields = ['id', 'name', 'photo','parent', 'slug']
+
+class CategoryAttributSer(serializers.ModelSerializer):
+    class Meta:
+        model = CategoryAttribute
+        fields = ['category', 'name']
+
+
+class AttributeValueSer(serializers.ModelSerializer):
+    class Meta:
+        model = AttributeValue
+        fields = "__all__"
+
 
 class ProductSer(serializers.ModelSerializer):
     class Meta:
@@ -55,22 +75,21 @@ class ProductSer(serializers.ModelSerializer):
     
 
 
-class IchkicategorySer(serializers.ModelSerializer):
-    class Meta:
-        model = Ichkicategory
-        fields = ['Category']
-
 class SavatSer(serializers.ModelSerializer):
     class Meta:
         model = Savat
+        fields = ['savat_item','user']
+
+
+class SavatItemSer(serializers.ModelSerializer):
+    class Meta:
+        model = SavatItem
         fields = ['product','soni']
 
-class Product_imgSer(serializers.ModelSerializer):
-    class meta:
-        model = Product_img
-        fields = ['rasm', 'product']
 
-
-
+class CommentSer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['user','product', 'content','created_at']
 
         
