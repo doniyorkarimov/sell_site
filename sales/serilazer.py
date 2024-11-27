@@ -48,7 +48,7 @@ class UserProfilSer(serializers.ModelSerializer):
 class Category1Ser(serializers.ModelSerializer):
     class Meta:
         model = Category1
-        fields = ['name','photo']
+        fields = ['id', 'name','photo']
 
 class CategorySer(serializers.ModelSerializer):
     class Meta:

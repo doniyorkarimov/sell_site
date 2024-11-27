@@ -46,7 +46,7 @@ class Category1(models.Model):
 class Category(MPTTModel):
     name = models.CharField(_("Name"), max_length=100)
     parent = TreeForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='children')
-    photo = models.ForeignKey(Photo, on_delete=models.SET_NULL, null=True, blank=True, related_name='category_photo')
+    photo = models.ImageField(upload_to='category_img')
     slug = models.SlugField(max_length=10, unique=True, blank=True)
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -61,6 +61,7 @@ class CategoryAttribute(models.Model):
 
 class Product(models.Model):
     name = models.CharField(_("product name"), max_length=200)
+    photo = models.ImageField(upload_to='product_img')
     description = models.TextField(_("description"), null=True, blank=True)
     price = models.DecimalField(_("product Price"), max_digits=10, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

@@ -26,18 +26,24 @@ class USerProfileModelViewSet(ModelViewSet):
 class ProductSerModelViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSer
+    parser_classes = [MultiPartParser, FormParser]
+
 
 class Category1ModelViewSet(ModelViewSet):
     queryset = Category1.objects.all()
     serializer_class = Category1Ser
+    parser_classes = [MultiPartParser, FormParser]
+
 
 class CategoryModelViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySer
+    parser_classes = [MultiPartParser, FormParser]
 
 class CategoryAttributeModelViewSet(ModelViewSet):
     queryset = CategoryAttribute.objects.all()
     serializer_class = CategoryAttributSer
+
 
 class AttributeValueModelViewSet(ModelViewSet):
     queryset = AttributeValue.objects.all()
